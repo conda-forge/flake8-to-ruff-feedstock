@@ -1,5 +1,5 @@
 {% set name = "flake8-to-ruff" %}
-{% set version = "0.0.233" %}
+{% set version = "0.0.234" %}
 
 package:
   name: {{ name|lower }}
@@ -7,20 +7,21 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/flake8_to_ruff-{{ version }}.tar.gz
-  sha256: ee519743260fa6d263415a5c5db90c44c3958fdc42069a5b249e7648c5ac3ac8
+  sha256: 00f1eb4115523f28d9cabaa06c26ee88ea68d1193b1a09209bac9d30949a8b22
 
 build:
   script: {{ PYTHON }} -m pip install . -vv
-  number: 3
+  number: 0
 
 requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
   host:
     - python
     - maturin >=0.14,<0.15
-    - pip    
+    - pip
   run:
     - python
 
@@ -29,7 +30,7 @@ test:
     - flake8-to-ruff --help
 
 about:
-  home: https://github.com/charliermarsh/ruff#subdirectory=crates/flake8_to_ruff  
+  home: https://github.com/charliermarsh/ruff#subdirectory=crates/flake8_to_ruff
   summary: Convert existing Flake8 configuration to Ruff.
   license: MIT
   license_file: local_dependencies/ruff/LICENSE
